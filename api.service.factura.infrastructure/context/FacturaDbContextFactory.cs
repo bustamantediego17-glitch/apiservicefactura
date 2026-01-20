@@ -9,7 +9,7 @@ public sealed class FacturaDbContextFactory : IDesignTimeDbContextFactory<Factur
     public FacturaDbContext CreateDbContext(string[] args)
     {
         var basePath = Directory.GetCurrentDirectory();
-        var config = new ConfigurationBuilder()
+        IConfigurationRoot config = new ConfigurationBuilder()
             .SetBasePath(basePath)
             .AddJsonFile("appsettings.json", optional: true)
             .AddJsonFile("appsettings.Development.json", optional: true)

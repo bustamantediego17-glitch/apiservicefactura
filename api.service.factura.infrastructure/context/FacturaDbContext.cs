@@ -5,17 +5,17 @@ namespace api.service.factura.infrastructure.context;
 
 public partial class FacturaDbContext(DbContextOptions<FacturaDbContext> options) : DbContext(options)
 {
-    public required DbSet<Cliente> Clientes { get; set; }
+    public DbSet<Cliente> Clientes { get; set; }
 
-    public required DbSet<Pedido> Pedidos { get; set; }
+    public DbSet<Pedido> Pedidos { get; set; }
 
-    public required DbSet<PedidoDetalle> PedidoDetalles { get; set; }
+    public DbSet<PedidoDetalle> PedidoDetalles { get; set; }
 
-    public required DbSet<Producto> Productos { get; set; }
+    public DbSet<Producto> Productos { get; set; }
 
-    public required DbSet<Categoria> Categorias { get; set; }
+    public DbSet<Categoria> Categorias { get; set; }
 
-    public required DbSet<Pago> Pagos { get; set; }
+    public DbSet<Pago> Pagos { get; set; }
 
     private static readonly string[] _aalLevel = ["aal1", "aal2", "aal3"];
     private static readonly string[] _codeChallengeMethod = ["s256", "plain"];

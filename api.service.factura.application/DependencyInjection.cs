@@ -1,3 +1,4 @@
+using api.service.factura.application.commons.dtos;
 using api.service.factura.application.features;
 using api.service.factura.application.ifeatures;
 using api.service.factura.application.validation;
@@ -16,12 +17,12 @@ public static class DependencyInjection
         services.AddScoped<IPedidoHandler, PedidoHandler>();
         services.AddScoped<IPagoHandler, PagoHandler>();
 
-        services.AddScoped<IValidator<commons.dtos.ClienteRequestDto>, ClienteRequestDtoValidator>();
-        services.AddScoped<IValidator<commons.dtos.CategoriaRequestDto>, CategoriaRequestDtoValidator>();
-        services.AddScoped<IValidator<commons.dtos.ProductoRequestDto>, ProductoRequestDtoValidator>();
-        services.AddScoped<IValidator<commons.dtos.PedidoRequestDto>, PedidoRequestDtoValidator>();
-        services.AddScoped<IValidator<commons.dtos.PedidoDetalleRequestDto>, PedidoDetalleRequestDtoValidator>();
-        services.AddScoped<IValidator<commons.dtos.PagoRequestDto>, PagoRequestDtoValidator>();
+        services.AddScoped<IValidator<ClienteRequestDto>, ClienteRequestDtoValidator>();
+        services.AddScoped<IValidator<CategoriaRequestDto>, CategoriaRequestDtoValidator>();
+        services.AddScoped<IValidator<ProductoRequestDto>, ProductoRequestDtoValidator>();
+        services.AddScoped<IValidator<PedidoRequestDto>, PedidoRequestDtoValidator>();
+        services.AddScoped<IValidator<PedidoDetalleRequestDto>, PedidoDetalleRequestDtoValidator>();
+        services.AddScoped<IValidator<PagoRequestDto>, PagoRequestDtoValidator>();
 
         return services;
     }

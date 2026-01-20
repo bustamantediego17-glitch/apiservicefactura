@@ -23,6 +23,14 @@ public static class PagoEndpoints
             .WithTags("Pagos")
             .WithSummary("Registra un pago")
             .WithDescription("Registra un pago para un pedido. Un pedido solo puede tener un pago.");
+        
+        builder.MapPut("/{id:int}", Update)
+            .WithTags("Pagos")
+            .WithSummary("Actualiza un pago");
+
+        builder.MapDelete("/{id:int}", Delete)
+            .WithTags("Pagos")
+            .WithSummary("Elimina un pago");
 
         return builder;
     }
@@ -37,7 +45,7 @@ public static class PagoEndpoints
         IPagoHandler pagoHandler)
     {
         var pago = await pagoHandler.GetById(id);
-        if (pago.PagoId == 0)
+        if (pago == null)
         {
             return TypedResults.NotFound("No encontrado");
         }
@@ -58,5 +66,39 @@ public static class PagoEndpoints
 
         var pago = await pagoHandler.Insert(pagoRequest);
         return TypedResults.Created($"/v1/pago/{pago.PagoId}", pago);
+    }
+    
+    static async Task<Results<Ok<PagoResponseDto>, NotFound<string>, ValidationProblem, ProblemHttpResult>> Update(
+        [FromRoute] int id,
+        [FromBody] PagoRequestDto pagoRequest,
+        IValidator<PagoRequestDto> validator,
+        IPagoHandler pagoHandler)
+    {
+        var validation = await validator.ValidateAsync(pagoRequest);
+        if (!validation.IsValid)
+        {
+            return TypedResults.ValidationProblem(validation.ToDictionary());
+        }
+
+        var pago = await pagoHandler.Update(id, pagoRequest);
+        if (pago == null)
+        {
+            return TypedResults.NotFound("No encontrado");
+        }
+
+        return TypedResults.Ok(pago);
+    }
+
+    static async Task<Results<NoContent, NotFound<string>, ProblemHttpResult>> Delete(
+        [FromRoute] int id,
+        IPagoHandler pagoHandler)
+    {
+        var result = await pagoHandler.Delete(id);
+        if (result == 0)
+        {
+            return TypedResults.NotFound("No encontrado");
+        }
+
+        return TypedResults.NoContent();
     }
 }

@@ -1,0 +1,10 @@
+api.service.factura.application/obj/
+api.service.factura.application/bin/
+api.service.factura.domain/obj/
+api.service.factura.domain/bin/
+api.service.factura.infrastructure/obj/
+api.service.factura.infrastructure/bin/
+api.service.factura.presentation/obj/
+api.service.factura.presentation/bin/
+/api.service.factura.presentation/appsettings.json.original
+/api.service.factura.presentation/appsettings.Development.json.original
